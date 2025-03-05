@@ -1,0 +1,331 @@
+Primer argumento a mirar "<<" para el heredoc
+
+	-> Se ignora la funcionalidad de "$" y se toma como parte del limitador
+		
+		<< $DAVID                      
+		> fkahfkja
+		> fkhakfha
+		> DAVID
+		> $DAVID
+-----------------------------------------------------------------------------
+		<< $ DAVID
+		> fkjah
+		> aifhkaf
+		> $
+		DAVID: command not found
+-----------------------------------------------------------------------------
+		<< $DAVID cat
+		> DAVID
+		> lfkknhalkfa
+		> $DAVID
+		DAVID
+		lfkknhalkfa
+-----------------------------------------------------------------------------
+		<< $DAVID cat | ls -la
+		> hola
+		> mundo
+		> $DAVID
+		total 200
+		drwx------ 27 dgargant 2019  4096 Nov 12 11:19 .
+		drwxr-xr-x 15 root     root  4096 Nov 12 11:00 ..
+-----------------------------------------------------------------------------
+		<< $               DAVID cat | ls -la
+		> 
+		> $
+		total 200
+		drwx------ 27 dgargant 2019  4096 Nov 12 11:19 .
+		drwxr-xr-x 15 root     root  4096 Nov 12 11:00 ..
+-----------------------------------------------------------------------------
+		(Sin comillas expande las variables introducidas)
+		<< $DAVID cat | cat
+		> $USER
+		> $PATH
+		> $DAVID
+		dgargant
+		/home/dgargant/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:
+		/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+-----------------------------------------------------------------------------
+		(Con comillas, tanto dobles como simples, lo entiende como literal)
+		<< "$USER" cat
+		> $PATH
+		> $USER
+		$PATH
+-----------------------------------------------------------------------------
+		<< $USER"" cat
+		> $PATH
+		> $USER
+		$PATH
+-----------------------------------------------------------------------------
+		<< "" cat
+		> $PATH
+		> 
+		$PATH
+-----------------------------------------------------------------------------
+		<< $asdasd"  "cat | "ls"
+		> $PATH
+		> $asdasd
+		> $asdasd  
+		> $asdasd   
+		> $asdasdcat
+		> $asdasd  cat
+		42-EXAM  Cursus  Desktop  Documents  Downloads	git-repo  goinfre
+		Music  Pictures  Public  sgoinfre  snap  Templates  Videos
+------------------------------------------------------------------------------
+		($"" esta reservado para diccionarios)
+		<< $""PATH
+		> "
+		> PATH
+
+		<< $""PATH
+		> "PATH
+		> PATH
+------------------------------------------------------------------------------
+		(hay que tener en cuenta el comportamiento de las comillas)
+		<< $"Patata"PATH
+		> hola
+		> mundo
+		> PatataPATH
+------------------------------------------------------------------------------
+		<< '$PATH" cat "'
+		> $PATH cat 
+		> PATH
+		> PATH cat 
+		> 
+		> $PATH" cat "
+------------------------------------------------------------------------------
+		<< '$PATH"' cat "
+		> "
+		> $PATH
+		> $PATH"
+		cat: ''$'\n': No such file or directory
+------------------------------------------------------------------------------
+		<< '$PATH cat | ls'
+		> $USER
+		> $PATH cat | ls
+------------------------------------------------------------------------------
+		<< '$PATH "cat | ls"'
+		> $user
+		> $PATH
+		> $PATH "cat | ls"
+------------------------------------------------------------------------------
+		<< '$PATH '"cat | ls"
+		> $USER
+		> $PATH 
+		> $PATH "cat | ls"
+		> '$PATH '"cat | ls"
+		> $PATH "
+		> $PATH cat | ls
+------------------------------------------------------------------------------
+		<< $"$'$PWD'"
+		> lklfna
+		> $'$PWD'
+------------------------------------------------------------------------------
+		ls -la | cat << hola
+		> $PATH
+		> $USER
+		> hola
+		/home/dgargant/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
+		/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+		dgargant
+------------------------------------------------------------------------------
+		<< hola cat | ls -la
+		> $USER
+		> $PATH
+		> hola
+		total 208
+		drwx------ 27 dgargant 2019  4096 Dec 11 09:46 .
+		drwxr-xr-x  7 root     root  4096 Dec 11 09:12 ..
+		drwxr-xr-x  9 dgargant 2019   202 Oct  9 14:14 42-EXAM
+		-rw-------  1 dgargant 2019  4591 Dec  4 13:05 .bash_history
+-------------------------------------------------------------------------------
+		<< hola | cat
+		> $PATH
+		> $USER
+		> hola
+-------------------------------------------------------------------------------
+		<<hola<<mundo<<paco
+		> hola
+		> mundo
+		> paco
+-------------------------------------------------------------------------------
+		<<hola <<mundo <<paco
+		> hola
+		> mundo
+		> paco
+-------------------------------------------------------------------------------
+		<< hola exit
+		> fñlmaf
+		> flknaf
+		> hola
+		exit
+	(En este caso debera hacer la funcionalidad del heredoc y luego hacer el exit)
+--------------------------------------------------------------------------------
+		< aaa.txt cat | grep a | << hola cat
+		> fkahkfb
+		> fkabfkjab
+		> hola
+		fkahkfb
+		fkabfkjab
+	(Tener cuidado con este caso porque es valido)
+Segundo argumento a mirar "$" para la expansion de bariables de entorno
+		
+		-> Miramos el orden de "" y ''
+
+		$PATH
+		bash: /home/dgargant/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:
+		/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin: 
+		No such file or directory
+
+			(esto es lo que recive bash en este caso)
+			/home/dgargant/bin:/home/dgargant/bin:/usr/local/sbin:
+			/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:
+			/usr/local/games:/snap/bin
+-------------------------------------------------------------------------------
+		$"PATH"
+		PATH: command not found
+
+			(esto es lo que recive bash en este caso)
+			$PATH
+-------------------------------------------------------------------------------
+		$'PATH'
+		PATH: command not found
+
+			(esto es lo que recive bash en este caso)
+			PATH
+-------------------------------------------------------------------------------
+		"$'PATH'"
+		$'PATH': command not found
+
+			(esto es lo que recive bash en este caso)
+			$'PATH'
+-------------------------------------------------------------------------------
+		'$'PATH''
+		$PATH: command not found
+
+			(esto es lo que recive bash en este caso)
+			$PATH
+-------------------------------------------------------------------------------
+		'$"PATH"'
+		$"PATH": command not found
+
+			(esto es lo que recive bash en este caso)
+			$"PATH"
+-------------------------------------------------------------------------------
+		$"PATH"'
+		> '
+		PATH
+		: command not found
+-------------------------------------------------------------------------------
+		$PATH""
+		bash: /home/dgargant/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:
+		/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin: 
+		No such file or directory
+-------------------------------------------------------------------------------
+		$PATH''
+		bash: /home/dgargant/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:
+		/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin: 
+		No such file or directory
+		
+-------------------------------------------------------------------------------
+		$"$'$PWD'"
+		bash: $'/home/dgargant': No such file or directory
+
+			(esto es lo que recive bash en este caso)
+			$$'/home/dgargant'
+-------------------------------------------------------------------------------
+
+
+(ERROR) (arreglado)
+ >2>2>3>4>6>7
+ <2<2<2<2<8<7
+ deberia devolver todos los numeros con su nodo
+
+
+-------------------------------------------------------------------------------
+		cat  | $lllll | ls
+		el segundo "argumento" se toma como nulo por lo tanto se ejecutan
+
+		cat  | "" | ls
+		el segundo "argumento" se toma como ''
+		
+		cat  | "  " | ls
+		el segundo "argumento" se toma como un comando vacio
+
+
+SYNTAX ERRORS:
+
+
+		"ls -la -a"
+		ls -la -a: command not found
+		'ls -la -a'
+		ls -la -a: command not found
+
+-------------------------------------------------------------------------------
+
+		# Variables
+		nombre="Ana"
+		echo "Nombre: $nombre"    # Salida: Nombre: Ana
+		echo 'Nombre: $nombre'    # Salida: Nombre: $nombre
+
+		# Comandos
+		echo "Fecha: $(date)"     # Muestra la fecha actual
+		echo 'Fecha: $(date)'     # Muestra literalmente: Fecha: $(date)
+
+
+-------------------------------------------------------------------------------
+
+		dgargant@c2r12s1:~$ ls -la "< paco la" "< paco"
+			ls: cannot access '< paco la': No such file or directory
+			ls: cannot access '< paco': No such file or directory
+		dgargant@c2r12s1:~$ ls -la '< paco la' "< paco"
+			ls: cannot access '< paco la': No such file or directory
+			ls: cannot access '< paco': No such file or directory
+		dgargant@c2r12s1:~$ ls -la '< paco $USER' "< paco"
+			ls: cannot access '< paco $USER': No such file or directory
+			ls: cannot access '< paco': No such file or directory
+		dgargant@c2r12s1:~$ ls -la '< paco $USER' "< paco $USER"
+			ls: cannot access '< paco $USER': No such file or directory
+			ls: cannot access '< paco dgargant': No such file or directory
+
+--------------------------------------------------------------------------------
+
+	->	En el primer caso no expande por que el '$' esta entre comillas
+			simples y junta los argumento en uno solo
+
+		dgargant@c1r10s1:~$ '$PATH '"cat | ls"
+			$PATH cat | ls: command not found
+
+
+	->	En el segundo caso expande por que el '$' esta entre comillas
+			dobles y junta los argumento en uno solo
+
+		dgargant@c1r10s1:~$ "$PATH "'cat | ls' cat
+			bash: /home/dgargant/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:
+			/usr/bin:/sbin:/bin:/usr/games:
+			/usr/local/games:/snap/bin cat | ls: No such file or directory
+
+--------------------------------------------------------------------------------
+
+	->	Al guardar una variable de entorno esta debe ser explandida
+		y posteriormente spliteada para la ejecucion en el execve()
+		 
+			ARG="ls -la"
+			dgargant@c1r10s1:~$ $ARG
+				total 148
+				drwx------ 28 dgargant 2019  4096 Feb 25 10:09 .
+				drwxr-xr-x 11 root     root  4096 Feb 25 10:06 ..
+				drwxr-xr-x  9 dgargant 2019   202 Oct  9 14:14 42-EXAM
+				-rw-------  1 dgargant 2019  5420 Feb 24 13:43 .bash_history
+				drwxr-xr-x  3 dgargant 2019   320 May  2  2024 .byobu
+
+---------------------------------------------------------------------------------
+
+	->	En este caso se puede ver que si una comilla esta dentro de otras comillas,
+		independientemente del tipo, estas se toman como literal y por lo tanto
+		no cuentan para el cierre de comillas.
+		
+		./bash_tokens "ls '-la " $USER' " cat"               
+			dgargant@c1r10s1 ~/Documents/MiniShell
+			 quote> '
+			argc 1: ls '-la 
+			argc 2: dgargant " cat"
