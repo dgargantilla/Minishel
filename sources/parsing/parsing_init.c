@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/05 10:38:18 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:37:21 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	parsing_init(t_pipes *data, char *rline)
 	line = ft_strdup(rline);
 	/*Aqui debera ir las funciones que inicie el control
 	de sintaxis y de expansion*/
+	if (sintax_init(data, line))
+	{
+		data->pars->fdb = 0;
+		data->pars->fs = 0;
+		return;
+	}
 	/* Aqui busco si existe algun heredoc
 	para empezar a contarlos y asi
 	poder reservar memoria para su doble puntero*/
@@ -66,7 +72,6 @@ void	parsing_init(t_pipes *data, char *rline)
 		data->cmds = data->cmds->next;
 		i = 0;
 	}
-	write(1, "hola\n",5);
 	/*int j = 0;
 	while (data->limiters[j])
 	{
@@ -75,6 +80,5 @@ void	parsing_init(t_pipes *data, char *rline)
 	}
 	printf(">>> %d\n", data->nhrd);
 	printf(">>> %d\n", data->npipes);*/
-	
 	free(line);
 }

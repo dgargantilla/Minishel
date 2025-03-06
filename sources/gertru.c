@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:34:28 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/05 11:38:55 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:52:41 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int main(int argc, char **argv, char **envp)
 	t_pipes *data;
 
 	data = ft_calloc(1, sizeof(t_pipes));
+	data->pars = ft_calloc(1, sizeof(t_pars));
 	data->env = envp;
 
 	if (argc == 1)

@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:51:31 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/05 11:38:00 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:20:02 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	if (!s1 || !s2)
-		return (1);
+	/*if (!s1 || !s2)
+		return (1);*/
 	while (s1[i] || s2[i])
 	{
 		if (s1[i] != s2[i])

@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:48 by dgargant          #+#    #+#             */
-/*   Updated: 2025/02/26 11:16:59 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:49:29 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ typedef struct s_cmds
 	struct s_cmds	*next;
 }			t_cmds;
 
-/*typedef struct s_parse
+//estructura de parsep
+typedef struct s_pars
 {
-	int		nfiles;
-}			t_parse;*/
+	int		fdb; //flag comillas dobles
+	int		fs; //flag comillas simples
+	int		count; //contador
+}			t_pars;
 
 
 typedef struct s_pipes
@@ -70,10 +73,8 @@ typedef struct s_pipes
 	char	*pwd;
 	char	*old_pwd;
 	//int		nfiles; // numero de archivos
-	int		fc_doble; // flag comilla doble
-	int		fc_simple; // flag comilla simple
 	t_cmds	*cmds; // lista de comandos
-	//t_parse *parse; // estructura de datos de parseo
+	t_pars *pars; // estructura de datos de parseo
 }			t_pipes;
 
 
@@ -110,6 +111,10 @@ void	take_pipes(t_pipes *data, char *line, int i);
 void	set_node_files(t_pipes *data, char *file, int flagfd);
 
 void	reset_comand(t_pipes *data,char *comand);
+
+int		sintax_init(t_pipes *data, char *line);
+
+int	reset_quotes(t_pipes *data);
 
 //int	is_piped(char *line, int i);
 

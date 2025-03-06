@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:07:08 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/05 10:56:53 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:51:47 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int take_fist_token(t_pipes *data ,char *line)
 			break;
 		j++;
 	}
-	write(1,"hola",4);
 	comand = ft_substr(line, i, (j - i));
 	take_token(data, comand);
 	count_node_files(data, line, i);
