@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/06 14:37:21 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:41:34 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	parsing_init(t_pipes *data, char *rline)
 	char *line;
 	
 	line = ft_strdup(rline);
+
 	/*Aqui debera ir las funciones que inicie el control
 	de sintaxis y de expansion*/
 	if (sintax_init(data, line))
@@ -36,7 +37,7 @@ void	parsing_init(t_pipes *data, char *rline)
 		count_heredocs(data, line);
 	if (ft_strnstr(line, "|", ft_strlen(line)))
 		count_pipes(data, line);
-		
+	data->pars->ncmds = ft_calloc((data->npipes + 2), sizeof(int));	
 	/* Esta funcion inicializa el tokenizado*/
 	tokenizer_init(data, line);
 
@@ -67,11 +68,22 @@ void	parsing_init(t_pipes *data, char *rline)
 				i++;
 			}
 		}
-		/*if (data->cmds->s_files->file == NULL)
-			write(1, "hola\n",5);*/
+		if (data->cmds->s_files->file == NULL)
+			write(1, "hola\n",5);
 		data->cmds = data->cmds->next;
 		i = 0;
 	}
+
+	int j;
+	
+	j = 0;
+	while (data->pars->ncmds[j] != 0)
+	{
+		printf("\nNum comandos: %d\n",data->pars->ncmds[j]);
+		j++;
+	}
+		printf("\n %d \n", data->pars->np);
+	
 	/*int j = 0;
 	while (data->limiters[j])
 	{
@@ -80,5 +92,9 @@ void	parsing_init(t_pipes *data, char *rline)
 	}
 	printf(">>> %d\n", data->nhrd);
 	printf(">>> %d\n", data->npipes);*/
+	printf("\n");
+	data->pars->np = 0;
+	data->pars->count = 0;
+	free(data->pars->ncmds);
 	free(line);
 }

@@ -329,3 +329,23 @@ SYNTAX ERRORS:
 			 quote> '
 			argc 1: ls '-la 
 			argc 2: dgargant " cat"
+
+
+---------------------------------------------------------------------------------------
+
+dgargant@c2r12s3:~$ "ls cat"< paco
+bash: paco: No such file or directory
+dgargant@c2r12s3:~$ "ls cat"<
+bash: syntax error near unexpected token `newline'
+dgargant@c2r12s3:~$ "ls cat"
+ls cat: command not found
+dgargant@c2r12s3:~$ "ls cat"<paco'grep a'
+bash: pacogrep a: No such file or directory
+dgargant@c2r12s3:~$ "ls cat"paco'grep a'
+ls catpacogrep a: command not found
+dgargant@c2r12s3:~$ "ls cat"'grep a'
+ls catgrep a: command not found
+dgargant@c2r12s3:~$ "ls cat"'grep a'
+
+
+ ls < 1 > "2  <<4"  -a '<3 >>>7' " | -l '<4<22" '|' -l <8 |  ls

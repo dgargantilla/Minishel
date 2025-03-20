@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/05 11:25:27 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:36:54 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	take_pipes(t_pipes *data, char *line, int i)
 	char *comand;
 	
 	comand = NULL;
+	data->pars->count = i;
+	//count_cmds(data, line);
 	comand = take_cmd(line, i);
 	take_token(data, comand);
 	count_node_files(data, line, i);
@@ -41,8 +43,7 @@ void	take_hdelimiter(t_pipes *data, char *line, int i)
 	while(line[j])
 	{
 		j++;
-		// añadir que pare en heredoc y outfile modo apend
-		// probablemente se requiera hacer una funcion a partepara esto
+		// probablemente se requiera hacer una funcion a parte para esto
 		if (!(line[j] >= '!' && line[j] <= 126) 
 		|| (line[j] == '<' || line[j] == '>' || line[j] == '|'))
 			break;

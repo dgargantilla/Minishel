@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:07:08 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/06 12:51:47 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:38:23 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ int take_fist_token(t_pipes *data ,char *line)
 	
 	i = 0;
 	comand = NULL;
+	count_cmds(data, line);
 	while (line[i] && !(line[i] >= '!' && line[i] <= 126))
-	{
 		i++;
-	}
 	j = i;
 	while(line[j])
 	{
-		if ((line[j] == '<' || line[j] == '>' || line[j] == '|' || line[j] == '$'))
+		if ((line[j] == '<' || line[j] == '>' || line[j] == '|'))
 			break;
 		j++;
 	}

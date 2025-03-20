@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:48 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/06 14:49:29 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:32:58 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_pars
 	int		fdb; //flag comillas dobles
 	int		fs; //flag comillas simples
 	int		count; //contador
+	int		np;
+	int		*ncmds;
 }			t_pars;
 
 
@@ -114,7 +116,9 @@ void	reset_comand(t_pipes *data,char *comand);
 
 int		sintax_init(t_pipes *data, char *line);
 
-int	reset_quotes(t_pipes *data);
+void	reset_quotes(t_pipes *data);
+
+void	count_cmds(t_pipes *data, char *line);
 
 //int	is_piped(char *line, int i);
 
