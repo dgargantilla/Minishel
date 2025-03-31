@@ -349,3 +349,27 @@ dgargant@c2r12s3:~$ "ls cat"'grep a'
 
 
  ls < 1 > "2  <<4"  -a '<3 >>>7' " | -l '<4<22" '|' -l <8 |  ls
+
+
+
+ "ls cat" "cat" | grep a
+Numero de pipes: 1
+Numero de Nodos: 2
+Numero de heredocs: 0
+
+<<< Nodos >>>
+ 
+Comando --> "ls cat"
+Numero de ficheros: 0
+hola
+Comando --> grep grep a 
+Numero de ficheros: 0
+hola
+
+Num comandos: 2
+
+Num comandos: 2
+
+Num comandos: 0
+
+ 2 

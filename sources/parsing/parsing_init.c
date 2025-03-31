@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/20 12:41:34 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/28 10:33:22 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ void	parsing_init(t_pipes *data, char *rline)
 		count_heredocs(data, line);
 	if (ft_strnstr(line, "|", ft_strlen(line)))
 		count_pipes(data, line);
-	data->pars->ncmds = ft_calloc((data->npipes + 2), sizeof(int));	
+	// Recordar que no tiene terminacion, por lo tanto debes recorrer el puntero con npipes
+	data->pars->ncmds = ft_calloc(data->npipes + 1, sizeof(int));
+	//printf("Numero de heredocs: %d", data->nhrd);
+	//printf("Numero de pipes: %d", data->npipes);
+	//data->pars->ncmds = ft_calloc((data->npipes + 2), sizeof(int));	
 	/* Esta funcion inicializa el tokenizado*/
 	tokenizer_init(data, line);
 
@@ -56,8 +60,8 @@ void	parsing_init(t_pipes *data, char *rline)
 		printf("Numero de ficheros: %d\n",
 			data->cmds->s_files->nfiles);
 		//printf("fichero %d: %s\n tipo: %d\n", i, 
-		//	data->cmds->struct_files->file[i],
-		//	data->cmds->struct_files->flagfd[i]);
+		//	data->cmds->s_files->file[i],
+		//	data->cmds->s_files->flagfd[i]);
 		if (data->cmds->s_files->file)
 		{
 			while(data->cmds->s_files->file[i])
@@ -77,24 +81,19 @@ void	parsing_init(t_pipes *data, char *rline)
 	int j;
 	
 	j = 0;
-	while (data->pars->ncmds[j] != 0)
+	while (j <= (data->npipes + 1))
 	{
 		printf("\nNum comandos: %d\n",data->pars->ncmds[j]);
 		j++;
 	}
-		printf("\n %d \n", data->pars->np);
-	
-	/*int j = 0;
-	while (data->limiters[j])
-	{
-		printf(">>> %s\n", data->limiters[j]);
-		j++;
-	}
-	printf(">>> %d\n", data->nhrd);
-	printf(">>> %d\n", data->npipes);*/
-	printf("\n");
+	printf("\n %d \n", data->pars->np);
+
+	free(data->pars->ncmds);
+	data->pars->ncmds  = NULL;
 	data->pars->np = 0;
 	data->pars->count = 0;
+	data->nhrd = 0;
+	data->npipes = 0;
 	free(data->pars->ncmds);
 	free(line);
 }

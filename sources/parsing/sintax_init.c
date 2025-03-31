@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:35:20 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/06 14:49:41 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:32:27 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	check_quotes(t_pipes *data, char *line)
 //recordar insertar funciones en el .h y el makefile
 int	sintax_init(t_pipes *data, char *line)
 {
+	if (line[0] == '\0')
+		return (1);
 	if (check_quotes(data, line))
 		return (1);
 	return (0);

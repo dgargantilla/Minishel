@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:48 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/12 10:32:58 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:48:57 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ typedef struct s_pipes
 	//char	**files; // contiene todos los archivos
 	int		mode; // (pav)
 	pid_t	*pids; // (forcks)
-	int		num_cmds; // num comandos (to do)
+	int		num_cmds; // numero de nodos (done)
 	char	**env; // puntero a enviroment (done)
-	int		nhrd; // numero de heredocs (done)
-	int		npipes; // numero de pipes (to do)
+	char	**env_cp; // Copia de enviroment (to do)
+	int		nhrd; // numero de heredocs (done) (modificado)
+	int		npipes; // numero de pipes  (modificado)
 	char	*pwd;
 	char	*old_pwd;
-	//int		nfiles; // numero de archivos
 	t_cmds	*cmds; // lista de comandos
 	t_pars *pars; // estructura de datos de parseo
 }			t_pipes;
@@ -119,6 +119,8 @@ int		sintax_init(t_pipes *data, char *line);
 void	reset_quotes(t_pipes *data);
 
 void	count_cmds(t_pipes *data, char *line);
+
+int	ft_is_token(char *line, int i);
 
 //int	is_piped(char *line, int i);
 
