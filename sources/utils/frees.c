@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 13:47:10 by pavicent          #+#    #+#             */
-/*   Updated: 2025/02/07 08:53:25 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:26:42 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	free_lists(t_cmds *lst)
 		{
 			/*if (tmp->file)
 				free(tmp->file);*/
-			if (tmp->cmd)
-				free(tmp->cmd);
 		}
 		free(tmp);
 	}

@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:48 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/31 12:48:57 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:16:57 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct s_files
 
 typedef struct s_cmds
 {
-	char			*cmd; // puntero del comando (done)
+	//char			*cmd; // puntero del comando (done)
+	char			**cmds; // doble puntero de los comandos (TO DO)
 	int				flag; // flag para las comillas ""/''
 	t_files			*s_files; // estructura que contiene los ficheros del nodo (done)
 	char			**args;
@@ -57,7 +58,10 @@ typedef struct s_pars
 	int		fs; //flag comillas simples
 	int		count; //contador
 	int		np;
-	int		*ncmds;
+	int		np2;
+	int		i; // contador de posicion en la tiena de tokenizado
+	int		c_cmd; // contador del puntero de ncmds
+	int		*ncmds; //puntero con el numero de comandos de cada nodo
 }			t_pars;
 
 
@@ -92,9 +96,9 @@ int		init_fd(t_pipes *data);
 
 int		init_pid(t_pipes **data);
 
-void	take_hdelimiter(t_pipes *data, char *line, int i);
+void	take_hdelimiter(t_pipes *data, char *line);
 
-void	take_tfile(t_pipes *data, char *line, int flagfd, int i);
+void	take_tfile(t_pipes *data, char *line, int flagfd);
 
 void	count_heredocs(t_pipes *data,char *line);
 
@@ -102,13 +106,13 @@ void	count_pipes(t_pipes *data, char *line);
 
 void	count_node_files(t_pipes *data, char *line, int i);
 
-char	*take_cmd(char *line ,int i);
+char	*take_cmd(t_pipes *data,char *line ,int i);
 
-void	take_token(t_pipes *data, char *comand);
+void	take_token(t_pipes *data);
 
-int		take_fist_token(t_pipes *data ,char *line);
+void		take_fist_token(t_pipes *data ,char *line);
 
-void	take_pipes(t_pipes *data, char *line, int i);
+void	take_pipes(t_pipes *data, char *line);
 
 void	set_node_files(t_pipes *data, char *file, int flagfd);
 
@@ -118,7 +122,11 @@ int		sintax_init(t_pipes *data, char *line);
 
 void	reset_quotes(t_pipes *data);
 
+void	insert_cmds(t_pipes *data, char *comand);
+
 void	count_cmds(t_pipes *data, char *line);
+
+void	take_quote(t_pipes *data, char *line, char c);
 
 int	ft_is_token(char *line, int i);
 
@@ -144,7 +152,7 @@ void	ft_lstadd_back(t_cmds *slst, t_cmds *new);
 
 //t_cmds	*ft_lstnew(int flagfd, char *cmd, char *file);
 
-t_cmds	*ft_lstnew(char *cmd);
+t_cmds	*ft_lstnew();
 
 //Frees
 

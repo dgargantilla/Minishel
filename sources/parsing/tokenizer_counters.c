@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 10:40:00 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/26 12:46:56 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:34:56 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ void	count_heredocs(t_pipes *data, char *line)
 			i++;
 			while (line[i] != '"')
 				i++;
-			i++;
 		}
 		else if (line[i] == '\'')
 		{
 			i++;
 			while (line[i] != '\'')
 				i++;
-			i++;
 		}else if (line[i] == '<' && line[i + 1] == '<')
 		{
 			data->nhrd = ++hdoc;
@@ -59,14 +57,12 @@ void	count_pipes(t_pipes *data, char *line)
 			i++;
 			while (line[i] != '"')
 				i++;
-			i++;
 		}
 		else if (line[i] == '\'')
 		{
 			i++;
 			while (line[i] != '\'')
 				i++;
-			i++;
 		}else if (line[i] == '|' )
 		{
 			data->npipes = ++npipe;
@@ -103,14 +99,12 @@ void	count_cmds(t_pipes *data, char *line)
 			ncmds++;
 			while (line[i] != '"')
 				i++;
-			i++;
 		} else if (line[i] == '\'')
 		{
 			i++;
 			ncmds++;
 			while (line[i] != '\'')
 				i++;
-			i++;
 		}else if (ft_is_token(line, i))
 		{
 			i++;
@@ -201,14 +195,12 @@ void	count_node_files(t_pipes *data, char *line, int i)
 			i++;
 			while (line[i] != '"')
 				i++;
-			i++;
 		}
 		else if (line[i] == '\'')
 		{
 			i++;
 			while (line[i] != '\'')
 				i++;
-			i++;
 		}else if (line[i] == '<' && line[i + 1] == '<')
 		{
 			nd->s_files->nfiles++;
@@ -217,7 +209,7 @@ void	count_node_files(t_pipes *data, char *line, int i)
 		else if (line[i] == '>' && line[i + 1] == '>')
 		{
 			nd->s_files->nfiles++;
-			i+=2;
+			i+= 2;
 		}
 		else if (line[i] == '<' || line[i] == '>')
 			nd->s_files->nfiles++;

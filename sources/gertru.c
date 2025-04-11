@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:34:28 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/27 12:27:53 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:32:04 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int main(int argc, char **argv, char **envp)
 
 	data = ft_calloc(1, sizeof(t_pipes));
 	data->pars = ft_calloc(1, sizeof(t_pars));
-	data->env = envp;
+	(void)envp;
+	//data->env = ft_init_env(envp);
 
 	if (argc == 1)
 		read_imput(data);

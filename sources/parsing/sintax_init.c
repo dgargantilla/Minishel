@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:35:20 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/27 12:32:27 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:25:49 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int	sintax_init(t_pipes *data, char *line)
 		return (1);
 	if (check_quotes(data, line))
 		return (1);
+	//if ()
 	return (0);
 }

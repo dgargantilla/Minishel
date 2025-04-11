@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/03/28 10:33:22 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/11 12:27:15 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parsing_init(t_pipes *data, char *rline)
 	char *line;
 	
 	line = ft_strdup(rline);
-
+	data->pars->c_cmd = 0;
 	/*Aqui debera ir las funciones que inicie el control
 	de sintaxis y de expansion*/
 	if (sintax_init(data, line))
@@ -38,10 +38,10 @@ void	parsing_init(t_pipes *data, char *rline)
 	if (ft_strnstr(line, "|", ft_strlen(line)))
 		count_pipes(data, line);
 	// Recordar que no tiene terminacion, por lo tanto debes recorrer el puntero con npipes
-	data->pars->ncmds = ft_calloc(data->npipes + 1, sizeof(int));
+	data->pars->ncmds = ft_calloc(data->npipes + 2, sizeof(int));
 	//printf("Numero de heredocs: %d", data->nhrd);
 	//printf("Numero de pipes: %d", data->npipes);
-	//data->pars->ncmds = ft_calloc((data->npipes + 2), sizeof(int));	
+	//data->pars->ncmds = ft_calloc((data->npipes + 2), sizeof(int));
 	/* Esta funcion inicializa el tokenizado*/
 	tokenizer_init(data, line);
 
@@ -51,12 +51,22 @@ void	parsing_init(t_pipes *data, char *rline)
 	printf("Numero de heredocs: %d\n", data->nhrd);
 	// visualizacion de los nodos
 	int i;
+	//int k;
 	i = 0;
+	//k = 0;
 	printf("\n<<< Nodos >>>\n \n");
 	while(data->cmds)
 	{
-		printf("Comando --> %s\n",
-			data->cmds->cmd);
+		/*printf("Comando --> %s\n",
+			data->cmds->cmd);*/
+		/*while (data->cmds->cmds && data->cmds->cmds[k]
+			&& data->cmds->cmds[k][0] != '\0')
+		{
+			printf("Comando doble puntero --> %s\n",
+			data->cmds->cmds[k]);
+			k++;
+		}
+		k = 0;*/
 		printf("Numero de ficheros: %d\n",
 			data->cmds->s_files->nfiles);
 		//printf("fichero %d: %s\n tipo: %d\n", i, 
@@ -94,6 +104,8 @@ void	parsing_init(t_pipes *data, char *rline)
 	data->pars->count = 0;
 	data->nhrd = 0;
 	data->npipes = 0;
+	data->pars->c_cmd = 0;
+	data->pars->np2 = 0;
 	free(data->pars->ncmds);
 	free(line);
 }
