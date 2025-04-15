@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 10:40:00 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/11 10:34:56 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/15 09:44:43 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,7 @@ void	count_cmds(t_pipes *data, char *line)
 		{
 			i++;
 			if (ft_is_token(line, i))
-			{
 				i++;
-			}
 			if (!ft_is_token(line, i))
 			{
 				while (!(line[i] >= '!' && line[i] <= 126))
@@ -122,15 +120,11 @@ void	count_cmds(t_pipes *data, char *line)
 					{
 						i++;
 						while (line[i] != '"' && line [i] != '\'')
-						{
 							i++;
-						}
 					}
 					if ((line[i] == '<' || line[i] == '>' || line[i] == '|')
 					|| !(line[i] >= '!' && line[i] <= 126))
-					{
 						break;
-					}
 					i++;
 				}
 				while (line[i] && !(line[i] >= '!' && line[i] <= 126))
@@ -165,12 +159,17 @@ void	count_cmds(t_pipes *data, char *line)
 			{
 				if ((line[i] == '<' || line[i] == '>' || line[i] == '|')
 						|| !(line[i] >= '!' && line[i] <= 126))
-						break;
+						{
+							i--;
+							break;
+						}
 				i++;
 			}
 			if (!line[i])
 				break;
 		}
+		/*if (line[i] == '|')
+			break;*/
 		i++;
 	}
 	//write(1, "hola", 4);

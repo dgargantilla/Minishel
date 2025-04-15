@@ -54,7 +54,10 @@ void	tokenizer_init(t_pipes *data, char *line)
 			{
 				if (!line[data->pars->i] || ft_is_token(line, data->pars->i) || line[data->pars->i] == '|'
 				|| !(line[data->pars->i] >= '!' && line[data->pars->i] <= 126))
+				{
+					data->pars->i--;
 					break;
+				}
 				data->pars->i++;
 			}
 		}

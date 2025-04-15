@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/11 12:27:15 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:38:35 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ void	parsing_init(t_pipes *data, char *rline)
 	printf("Numero de heredocs: %d\n", data->nhrd);
 	// visualizacion de los nodos
 	int i;
-	//int k;
+	int k;
 	i = 0;
-	//k = 0;
+	k = 0;
 	printf("\n<<< Nodos >>>\n \n");
 	while(data->cmds)
 	{
 		/*printf("Comando --> %s\n",
 			data->cmds->cmd);*/
-		/*while (data->cmds->cmds && data->cmds->cmds[k]
+		while (data->cmds->cmds && data->cmds->cmds[k]
 			&& data->cmds->cmds[k][0] != '\0')
 		{
 			printf("Comando doble puntero --> %s\n",
 			data->cmds->cmds[k]);
 			k++;
 		}
-		k = 0;*/
+		k = 0;
 		printf("Numero de ficheros: %d\n",
 			data->cmds->s_files->nfiles);
 		//printf("fichero %d: %s\n tipo: %d\n", i, 
