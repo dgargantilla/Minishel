@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:48 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/11 10:16:57 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:08:29 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_files
 	char			**file; // doble puntero con los fichero del nodo (done)
 	int				*flagfd; // numero que indica que tipo de redireccion/ejecuciones (done)
 	int				*fd; // fd del documento (pav)
+	int				hrd_n; // 1 = delimitador entre comillas(no se expande), 0 = delimitador sin comillas
 	int				nfiles; // numero de ficheros en el nodo  (done)
 }		t_files;
 
@@ -61,6 +62,7 @@ typedef struct s_pars
 	int		np2;
 	int		i; // contador de posicion en la tiena de tokenizado
 	int		c_cmd; // contador del puntero de ncmds
+	int		hrd_n; // 1 = delimitador entre comillas(no se expande), 0 = delimitador sin comillas
 	int		*ncmds; //puntero con el numero de comandos de cada nodo
 }			t_pars;
 

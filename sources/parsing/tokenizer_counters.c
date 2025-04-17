@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 10:40:00 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/15 09:44:43 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:47:46 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,16 +203,17 @@ void	count_node_files(t_pipes *data, char *line, int i)
 		}else if (line[i] == '<' && line[i + 1] == '<')
 		{
 			nd->s_files->nfiles++;
-			i+= 2;
+			i+= 1;
 		}	
 		else if (line[i] == '>' && line[i + 1] == '>')
 		{
 			nd->s_files->nfiles++;
-			i+= 2;
+			i+= 1;
 		}
 		else if (line[i] == '<' || line[i] == '>')
 			nd->s_files->nfiles++;
-		i++;
+		if (line[i])
+			i++;
 	}
 	if (nd->s_files->nfiles > 0)
 	{

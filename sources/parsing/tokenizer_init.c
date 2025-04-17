@@ -22,7 +22,6 @@ void	tokenizer_init(t_pipes *data, char *line)
 	data->pars->np2 = 0;
 	data->pars->c_cmd = 0;
 	take_fist_token(data, line);
-	//printf("\n<< %d >>", i);
 	while (line[data->pars->i])
 	{
 		if (line[data->pars->i] == '"')
@@ -45,11 +44,9 @@ void	tokenizer_init(t_pipes *data, char *line)
 			take_pipes(data, line);
 		else if (line[data->pars->i] >= '!' && line[data->pars->i] <= 126)
 		{
-
 			// Arreglar esto, da segfault por esto
 			printf("data->pars->i: %d\n", data->pars->i);
 			insert_cmds(data,take_cmd(data,line, data->pars->i));
-			//reset_comand(data, take_cmd(line, data->pars->i));
 			while (line[data->pars->i])
 			{
 				if (!line[data->pars->i] || ft_is_token(line, data->pars->i) || line[data->pars->i] == '|'

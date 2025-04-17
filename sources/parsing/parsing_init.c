@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/15 10:38:35 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:08:21 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,14 @@ void	parsing_init(t_pipes *data, char *rline)
 				printf("fichero %d: %s\n tipo: %d\n", i, 
 					data->cmds->s_files->file[i],
 					data->cmds->s_files->flagfd[i]);
+				if (data->cmds->s_files->flagfd[i] == 2)
+					printf("Quotes hrd si 1, no 0 : %d\n",
+					data->cmds->s_files->hrd_n);
 				i++;
 			}
 		}
-		if (data->cmds->s_files->file == NULL)
-			write(1, "hola\n",5);
+		//if (data->cmds->s_files->file == NULL)
+		//	write(1, "hola\n",5);
 		data->cmds = data->cmds->next;
 		i = 0;
 	}

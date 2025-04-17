@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/11 12:58:25 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:08:56 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,13 @@
 void	take_pipes(t_pipes *data, char *line)
 {
 	int i;
-	//char *comand;
 	
 	i = data->pars->i + 1;
-	//comand = NULL;
 	data->pars->count = i;
 	count_cmds(data, line);
-	//comand = take_cmd(data, line, i);
 	take_token(data);
 	data->pars->np2 = 0;
 	data->pars->c_cmd++;
-	//insert_cmds(data,comand);
-	// hacer que (count_node_files) tenga en cuenta comillas(done)
 	count_node_files(data, line, i);
 }
 
@@ -38,20 +33,17 @@ void	take_hdelimiter(t_pipes *data, char *line)
 {
 	int i;
 	int j;
-	//char *comand;
 	char *limiter;
 
 	i = data->pars->i + 1;
+	data->pars->hrd_n = 0;
 	j = 0;
-	//comand = NULL;
 	limiter = NULL;
 	while (!(line[i] >= '!' && line[i] <= 126))
 		i++;
 	j =  i;
 	while(line[j])
 	{
-		// hay que modificar para recoger el delimitador con comillas
-		// hay que recoger el file sin comillas
 		if (line[j] == '"')
 		{
 			j++;
@@ -69,19 +61,18 @@ void	take_hdelimiter(t_pipes *data, char *line)
 			break;
 		j++;
 	}
-	data->pars->i = j;
+	if (line[j] == '<' || line[j] == '>' || line[j] == '|')
+		data->pars->i = j - 1;
+	else	
+		data->pars->i = j;
+	if (line[i] == '"' || line[i] == '\'')
+	{
+		j--;
+		i++;
+		data->pars->hrd_n = 1;
+	}
 	limiter = ft_substr(line, i, (j - i));
 	set_node_files(data, limiter, N_HRD);
-	/*if (!(line[j] == '<' || line[j] == '>' || line[j] == '|'))
-	{
-		comand = take_cmd(data, line, j);
-		insert_cmds(data, comand);
-		//reset_comand(data, comand);
-	}*/
-	//(void)cmd;
-	//printf("%d -> %s\n", ndoc ,data->limiters[ndoc]);
-	//printf(" > %s\n", comand);
-	//printf(" > %s\n", data->cmds->cmd);
 }
 
 /* Esta funcion recoge el infile y lo inserta en el nuevo nodo
@@ -90,12 +81,10 @@ void	take_tfile(t_pipes *data, char *line, int flagfd)
 {
 	int	i;
 	int j;
-	//char *comand;
 	char *file;
 
 	i = data->pars->i + 1;
 	j = 0;
-	//comand = NULL;
 	(void)flagfd; 
 	while (!(line[i] >= '!' && line[i] <= 126))
 		i++;
@@ -122,17 +111,15 @@ void	take_tfile(t_pipes *data, char *line, int flagfd)
 			break;
 		j++;
 	}
-	data->pars->i = j;
+	if (line[j] == '<' || line[j] == '>' || line[j] == '|')
+		data->pars->i = j - 1;
+	else	
+		data->pars->i = j;
+	if (line[i] == '"' || line[i] == '\'')
+	{
+		j--;
+		i++;
+	}
 	file = ft_substr(line, i, (j - i));
 	set_node_files(data, file, flagfd);
-	/*if (!( line[j] == '|'))
-	{
-		comand = take_cmd(data, line, j);
-		insert_cmds(data, comand);
-		//reset_comand(data, comand);
-	}*/
-	//(void)cmd;
-	//printf("%d -> %s\n", ndoc ,data->limiters[ndoc]);
-	//printf(" > %s\n", comand);
-	//printf(" > %s\n", data->cmds->cmd);
 }

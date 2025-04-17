@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:07:08 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/11 13:01:53 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:11:13 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,29 +138,6 @@ void	take_token(t_pipes *data)
 }
 
 
-/* Esta funcion actualiza el contenido del nodo cmd
-y lo crea si este no esta inicializado */
-/*void	reset_comand(t_pipes *data,char *comand)
-{
-	t_cmds *last;
-	char *tmp;
-	
-	last = NULL;
-	tmp = NULL;
-
-	if (data->cmds)
-	{
-		//write(1, "hello", 5);
-		last = ft_lstlast(data->cmds);
-		tmp = last->cmd;
-		last->cmd = ft_superjoin(tmp, ' ' ,comand);
-		free(tmp);
-		free(comand);
-	} else
-		data->cmds = ft_lstnew(comand);
-}*/
-
-
 /*Funcion que introduce los ficheros y el tipo de redireccion
 	en los punteros de la structura files*/
 void	set_node_files(t_pipes *data, char *file, int flagfd)
@@ -177,6 +154,8 @@ void	set_node_files(t_pipes *data, char *file, int flagfd)
 		{
 			current->s_files->file[i] = file;
 			current->s_files->flagfd[i] = flagfd;
+			if (flagfd == N_HRD)
+				current->s_files->hrd_n = data->pars->hrd_n;
 			return;
 		}
 		else

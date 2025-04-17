@@ -498,3 +498,30 @@ Num comandos: 0
 Num comandos: 0
 
  1 
+
+ ----------------------------------------------
+
+ <4>5>9<<7>8
+data->pars->i: 3
+data->pars->i: 10
+Numero de pipes: 0
+Numero de Nodos: 1
+Numero de heredocs: 1
+
+<<< Nodos >>>
+ 
+Comando doble puntero --> 5
+Comando doble puntero --> 8
+Numero de ficheros: 5
+fichero 0: 4
+ tipo: 0
+fichero 1: 9
+ tipo: 1
+fichero 2: 7
+ tipo: 0
+
+Num comandos: 0
+
+Num comandos: 0
+
+ 1
