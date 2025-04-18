@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:48 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/17 09:08:29 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/18 12:34:52 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,20 @@ typedef struct s_pipes
 }			t_pipes;
 
 
+typedef enum s_aut
+{
+	A_INI,
+	A_ERR,
+	A_SPA,
+	A_PRI,
+	A_DOB,
+	A_SIN,
+	A_PIP,
+	A_RIN,
+	A_ROU,
+	A_RIO,
+}	t_aut;
+
 int		main(int argc, char **argv, char **envp);
 
 void	read_imput(t_pipes *data);
@@ -118,12 +132,6 @@ void	take_pipes(t_pipes *data, char *line);
 
 void	set_node_files(t_pipes *data, char *file, int flagfd);
 
-void	reset_comand(t_pipes *data,char *comand);
-
-int		sintax_init(t_pipes *data, char *line);
-
-void	reset_quotes(t_pipes *data);
-
 void	insert_cmds(t_pipes *data, char *comand);
 
 void	count_cmds(t_pipes *data, char *line);
@@ -131,6 +139,26 @@ void	count_cmds(t_pipes *data, char *line);
 void	take_quote(t_pipes *data, char *line, char c);
 
 int	ft_is_token(char *line, int i);
+
+char	**ft_init_env(char **str);
+
+int	ft_array_length(char **str);
+
+int		syntax_init(char *line);
+
+int	ft_check_syntax(char *line);
+
+int	check_state(int prev, char c);
+
+int	get_state(int prev, int pos);
+
+char	*expand_init(t_pipes *data, char *line);
+
+char	*take_v(char *line, int i);
+
+char	*search_in_env(t_pipes *data, char *v_search);
+
+char	*insert_expansion(char *line, char * var, char *exp, int i);
 
 //int	is_piped(char *line, int i);
 

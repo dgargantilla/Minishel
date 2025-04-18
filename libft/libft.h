@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 10:03:46 by dgargant          #+#    #+#             */
-/*   Updated: 2025/01/23 12:50:16 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/18 08:59:34 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ int	ft_isalpha(int c);
 int	ft_isdigit(int c);
 
 int	ft_isprint(int c);
+
+int	ft_isspace(int c);
 
 #endif

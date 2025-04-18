@@ -6,7 +6,7 @@
 #    By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 10:13:27 by dgargant          #+#    #+#              #
-#    Updated: 2025/04/15 10:40:53 by dgargant         ###   ########.fr        #
+#    Updated: 2025/04/18 08:53:01 by dgargant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ SRCS :=	 $(addprefix sources/, \
 	gertru.c	\
 	$(addprefix parsing/,	\
 	parsing_init.c	tokenizer_init.c	tokenizer_utils.c\
-	tokenizer_counters.c	tokenizer_redirec.c	sintax_init.c\
+	tokenizer_counters.c	tokenizer_redirec.c	syntax_aut.c\
 	expand_init.c)	\
 	$(addprefix utils/,	\
-	frees_2.c	frees.c	list_utils.c))
+	frees_2.c	frees.c	list_utils.c	init_env.c	length.c))
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 
