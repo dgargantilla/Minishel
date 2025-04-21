@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/18 12:48:50 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:03:34 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parsing_init(t_pipes *data, char *rline)
 		return;
 		
 	line = expand_init(data, line);
-	//printf("Linea final: %s\n", line);
+	printf("Linea final: %s\n", line);
 
 	// COMPROBAR SI LA EXPANSION HA DEVUELTO UNA STRING VACIA
 	if (!line)
@@ -47,10 +47,10 @@ void	parsing_init(t_pipes *data, char *rline)
 	//data->pars->ncmds = ft_calloc((data->npipes + 2), sizeof(int));
 	/* Esta funcion inicializa el tokenizado*/
 	
-	//tokenizer_init(data, line);
+	tokenizer_init(data, line);
 
 
-	/*printf("Numero de pipes: %d\n", data->npipes);
+	printf("Numero de pipes: %d\n", data->npipes);
 	printf("Numero de Nodos: %d\n", data->num_cmds);
 	printf("Numero de heredocs: %d\n", data->nhrd);
 	// visualizacion de los nodos
@@ -92,7 +92,7 @@ void	parsing_init(t_pipes *data, char *rline)
 		//	write(1, "hola\n",5);
 		data->cmds = data->cmds->next;
 		i = 0;
-	}*/
+	}
 
 	/*int j;
 	
@@ -112,6 +112,8 @@ void	parsing_init(t_pipes *data, char *rline)
 	data->npipes = 0;
 	data->pars->c_cmd = 0;
 	data->pars->np2 = 0;
+	data->pars->fdb = 0;
+	data->pars->fs = 0;
 	free(data->pars->ncmds);
 	free(line);
 }

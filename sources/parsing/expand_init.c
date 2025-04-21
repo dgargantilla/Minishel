@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 10:39:05 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/18 12:50:24 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:26:15 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*expand_init(t_pipes *data, char *line)
 		{
 			while (line[i] && line[i] >= '!' && line[i] <= 126)
 				i++;
+			data->pars->fs = 0;
 		}
 		else if (line[i] == '$')
 		{
@@ -66,16 +67,14 @@ char	*expand_init(t_pipes *data, char *line)
 			printf("variable expandida: %s\n", exp);
 			new_line = insert_expansion(line, var, exp, i);
 			printf("Nueva linea: %s\n", new_line);
+			free(line);
+			line = NULL;
+			line = new_line;
 		}
-	
-	//buscar esa variable en el enviroment y reservar lo que devuelva 
-	//contar cuanto ocupa y crear una reserva de memoria de la nueva linea
-	//insertar la variable expandida
-	// hacerlo repetidamente hasta el final de linea
-	
-		i++;
+		if (line[i])
+			i++;
 	}
-	return (new_line);
+	return (line);
 }
 
 char	*take_v(char *line, int i)
@@ -121,8 +120,6 @@ char	*search_in_env(t_pipes *data, char *v_search)
 		}
 		i++;
 	}
-	//free(v_search);
-	//v_search = NULL;
 	return (path);
 }
 
@@ -137,10 +134,13 @@ char	*insert_expansion(char *line, char * var, char *exp, int i)
 	j = 0;
 	k = 0;
 	l = 0;
+	new_legth = 0;
 	if (!line)
 		return (NULL);
 	new_legth = (ft_strlen(line) - (ft_strlen(var) + 1)) + ft_strlen(exp);
-	new_line =ft_calloc(new_legth, sizeof(char));
+	printf("<<<<< l: %zu, v: %zu, e: %zu, total: %zu >>>>>>> \n", ft_strlen(line), (ft_strlen(var) + 1),
+		ft_strlen(exp), new_legth);
+	new_line = ft_calloc(new_legth + 1, sizeof(char));
 	while (line[j])
 	{
 		if (j == i)
@@ -150,23 +150,27 @@ char	*insert_expansion(char *line, char * var, char *exp, int i)
 			{
 				j++;
 			}
-			while (exp[l])
+			if (exp)
 			{
-				new_line[k] = exp[l];
-				k++;
-				l++;
+				while (exp[l])
+				{
+					new_line[k] = exp[l];
+					k++;
+					l++;
+				}
 			}
 		}
 		new_line[k] = line[j];
-		k++;
-		j++;
+		if (line[j])
+		{
+			k++;
+			j++;
+		}
 	}
 	free(var);
 	var = NULL;
 	free(exp);
 	exp = NULL;
-	free(line);
-	line = NULL;
 	return (new_line);
 }
 

@@ -525,3 +525,35 @@ Num comandos: 0
 Num comandos: 0
 
  1
+
+
+--------------------------------------------
+
+CASOS RAROS
+
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo hola | cat | cat
+hola
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo hola | &cat | cat
+bash: syntax error near unexpected token `&'
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo hola | $cat | cat
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo hola | $catasdasd | cat
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo hola | $cat | cat
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo hola | $catsdfsdfsdf | cat
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo hola | $catsdfsdfsdf | ls
+BashArguments.txt  ft_sp_splitt.c  includes  libft  Makefile  minishell  objs  README.md  sources
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $,.-akjsdhajskdh
+$,.-akjsdhajskdh
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $$
+2565751
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $_USER
+
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ export _DANI="hola"
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $DANI
+
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $_DANI
+hola
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $ USER
+$ USER
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $.USER
+$.USER
+dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $.USER
