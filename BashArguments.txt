@@ -557,3 +557,34 @@ $ USER
 dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $.USER
 $.USER
 dgargant@c2r11s3:~/Desktop/Repos/minishell$ echo $.USER
+
+
+
+
+----------------------------------------------------------------------
+
+bash:
+"$USER "$LANGUAGE' $USER" $LANGUAGE "$USER '" $USER"
+dgargant en $USER" $LANGUAGE "$USER  dgargant: command not found
+
+
+minishell:
+Linea final: "dgargant "en' $USER" en "dgargant '" dgargant"
+
+data->pars->i: 11
+Numero de pipes: 0
+Numero de Nodos: 1
+Numero de heredocs: 0
+
+<<< Nodos >>>
+ 
+Comando doble puntero --> dgargant 
+Comando doble puntero --> en' $USER" en "dgargant '" dgargant"
+Numero de ficheros: 0
+
+
+""|"" |""
+Linea final: ""|"" |""
+444
+>>>>>>linea moviendo comillas: | |
+zsh: segmentation fault (core dumped)  ./minishell

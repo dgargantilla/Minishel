@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:17:38 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/21 12:03:34 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:05:19 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	parsing_init(t_pipes *data, char *rline)
 		
 	line = expand_init(data, line);
 	printf("Linea final: %s\n", line);
+	quote_manager(data, line);
+	//printf("%d", data->pars->fdb);
+	//printf("%d", data->pars->fs);
 
+	
 	// COMPROBAR SI LA EXPANSION HA DEVUELTO UNA STRING VACIA
 	if (!line)
 		return;
@@ -47,7 +51,7 @@ void	parsing_init(t_pipes *data, char *rline)
 	//data->pars->ncmds = ft_calloc((data->npipes + 2), sizeof(int));
 	/* Esta funcion inicializa el tokenizado*/
 	
-	tokenizer_init(data, line);
+	/*tokenizer_init(data, line);
 
 
 	printf("Numero de pipes: %d\n", data->npipes);
@@ -92,7 +96,7 @@ void	parsing_init(t_pipes *data, char *rline)
 		//	write(1, "hola\n",5);
 		data->cmds = data->cmds->next;
 		i = 0;
-	}
+	}*/
 
 	/*int j;
 	
@@ -116,4 +120,5 @@ void	parsing_init(t_pipes *data, char *rline)
 	data->pars->fs = 0;
 	free(data->pars->ncmds);
 	free(line);
+	line = NULL;
 }

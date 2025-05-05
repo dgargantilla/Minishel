@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:48 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/21 11:45:24 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/05/05 10:59:54 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_files
 
 typedef struct s_cmds
 {
-	//char			*cmd; // puntero del comando (done)
 	char			**cmds; // doble puntero de los comandos (TO DO)
 	int				flag; // flag para las comillas ""/''
 	t_files			*s_files; // estructura que contiene los ficheros del nodo (done)
@@ -70,8 +69,6 @@ typedef struct s_pars
 typedef struct s_pipes
 {
 	int		**fd; // fds de los pipes
-	//char	**limiters; // palabras delimitadoras de los heredoc (done)  <<== pasar a s_files
-	//char	**files; // contiene todos los archivos
 	int		mode; // (pav)
 	pid_t	*pids; // (forcks)
 	int		num_cmds; // numero de nodos (done)
@@ -159,6 +156,10 @@ char	*take_v(char *line, int i);
 char	*search_in_env(t_pipes *data, char *v_search);
 
 char	*insert_expansion(char *line, char * var, char *exp, int i);
+
+void	delete_some_quotes(t_pipes *data, char *line, char *new_line, int i);
+
+void	quote_manager(t_pipes *data, char *line);
 
 //int	is_piped(char *line, int i);
 

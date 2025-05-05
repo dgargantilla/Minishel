@@ -6,7 +6,7 @@
 #    By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 10:13:27 by dgargant          #+#    #+#              #
-#    Updated: 2025/04/18 08:53:01 by dgargant         ###   ########.fr        #
+#    Updated: 2025/04/25 11:16:01 by dgargant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRCS :=	 $(addprefix sources/, \
 	$(addprefix parsing/,	\
 	parsing_init.c	tokenizer_init.c	tokenizer_utils.c\
 	tokenizer_counters.c	tokenizer_redirec.c	syntax_aut.c\
-	expand_init.c)	\
+	expand_init.c	move_quotes.c)	\
 	$(addprefix utils/,	\
 	frees_2.c	frees.c	list_utils.c	init_env.c	length.c))
 

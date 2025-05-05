@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:34:28 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/18 12:34:25 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:25:35 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ y llama al resto de funciones principales*/
 void	read_imput(t_pipes *data)
 {
 	char *line = NULL;
-	//int i = 0;
 	
 	while (1)
 	{
@@ -25,19 +24,21 @@ void	read_imput(t_pipes *data)
 		if (line == NULL)
 			break;
 		if (ft_strcmp(line, "exit") == 0)
+		{
+			free(line);
+			clear_history();
 			break;
+		}
 		if (line != NULL)
 		{
 			parsing_init(data, line);
-			/*printf(" > %s" ,data->envps[i]);
-			//printf(" > %s\n", line);
-			i++;*/
 			/*AL FINAL TENDREMOS QUE LIBERAR LA MEMORIA
 				DE TODAS LAS VARIABLES QUE QUE SE TENGAN
 				QUE RESETEAR Y RESETEARLAS A 0/NULL*/
 			data->num_cmds = 0;
 		}
 		add_history(line);
+		free(line);
 	}
 }
 
@@ -48,8 +49,6 @@ int main(int argc, char **argv, char **envp)
 	data = ft_calloc(1, sizeof(t_pipes));
 	data->pars = ft_calloc(1, sizeof(t_pars));
 	data->env = ft_init_env(envp);
-	//data->env = ft_init_env(envp);
-
 	if (argc == 1)
 		read_imput(data);
 	else if(argc == 2)

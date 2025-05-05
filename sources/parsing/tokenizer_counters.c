@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 10:40:00 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/17 10:47:46 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:36:11 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ void	count_pipes(t_pipes *data, char *line)
 			while (line[i] != '\'')
 				i++;
 		}else if (line[i] == '|' )
-		{
 			data->npipes = ++npipe;
-			i++;
-		}
 		i++;
 	}
 }

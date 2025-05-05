@@ -6,7 +6,7 @@
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 10:39:05 by dgargant          #+#    #+#             */
-/*   Updated: 2025/04/21 12:26:15 by dgargant         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:06:04 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ char	*expand_init(t_pipes *data, char *line)
 			}
 		}
 		// si estoy en comillas simples ignoro la variable	
-		if (line[i] == '$' && (data->pars->fs == 1))
-		{
-			while (line[i] && line[i] >= '!' && line[i] <= 126)
-				i++;
-			data->pars->fs = 0;
-		}
-		else if (line[i] == '$')
+		//if (line[i] == '$' && (data->pars->fs == 1))
+		//{
+		//	while (line[i] && line[i] >= '!' && line[i] <= 126)
+		//		i++;
+		//	//data->pars->fs = 0;
+		//}else 
+		if (line[i] == '$' && (data->pars->fs == 0))
 		{
 			var = take_v(line, i);
-			printf("variable sin expandir: %s\n", var);
+			//printf("variable sin expandir: %s\n", var);
 			exp = search_in_env(data, var);
-			printf("variable expandida: %s\n", exp);
+			//printf("variable expandida: %s\n", exp);
 			new_line = insert_expansion(line, var, exp, i);
-			printf("Nueva linea: %s\n", new_line);
+			//printf("Nueva linea: %s\n", new_line);
 			free(line);
 			line = NULL;
 			line = new_line;
@@ -138,8 +138,8 @@ char	*insert_expansion(char *line, char * var, char *exp, int i)
 	if (!line)
 		return (NULL);
 	new_legth = (ft_strlen(line) - (ft_strlen(var) + 1)) + ft_strlen(exp);
-	printf("<<<<< l: %zu, v: %zu, e: %zu, total: %zu >>>>>>> \n", ft_strlen(line), (ft_strlen(var) + 1),
-		ft_strlen(exp), new_legth);
+	//printf("<<<<< l: %zu, v: %zu, e: %zu, total: %zu >>>>>>> \n", ft_strlen(line), (ft_strlen(var) + 1),
+	//	ft_strlen(exp), new_legth);
 	new_line = ft_calloc(new_legth + 1, sizeof(char));
 	while (line[j])
 	{
@@ -174,11 +174,3 @@ char	*insert_expansion(char *line, char * var, char *exp, int i)
 	return (new_line);
 }
 
-/*void	*move_quotes(t_pipes *data, char *line)
-{
-	char	*new_line;
-
-	//
-
-	return (new_line);
-}*/
