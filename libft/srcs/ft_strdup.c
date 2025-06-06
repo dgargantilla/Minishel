@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2024/01/17 08:54:36 by dgargant          #+#    #+#             */
+/*   Updated: 2024/02/16 14:38:08 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-void	take_pipes(t_pipes *data, char *line)
+char	*ft_strdup(const char *s1)
 {
-	int	i;
+	int		i;
+	char	*str;
+	char	*p;
 
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	if (!s1)
+		return (NULL);
+	i = 0;
+	str = (char *)s1;
+	p = malloc(ft_strlen(str) + 1);
+	if (p == 0)
+		return (0);
+	while (str[i] != '\0')
+	{
+		p[i] = str[i];
+		++i;
+	}
+	p[i] = '\0';
+	return (p);
 }

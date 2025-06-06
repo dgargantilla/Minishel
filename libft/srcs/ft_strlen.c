@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2024/01/09 10:51:38 by dgargant          #+#    #+#             */
+/*   Updated: 2024/12/19 10:50:43 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-void	take_pipes(t_pipes *data, char *line)
+size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	len;
 
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	len = 0;
+	if (!s)
+		return (0);
+	while (*s != '\0')
+	{
+		++len;
+		s = s + 1;
+	}
+	return (len);
 }
+
+/*int	main(void)
+{
+	char str[50] = "hola, mundo";
+	size_t lon = ft_strlen(str);
+
+	printf("\nla string es: %s\n", str);
+
+    printf("su longitud es: %lu\n", lon);
+}*/

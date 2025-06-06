@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pavicent <pavicent@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2025/05/19 13:46:24 by pavicent          #+#    #+#             */
+/*   Updated: 2025/05/19 13:46:26 by pavicent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gertru.h"
 
-void	take_pipes(t_pipes *data, char *line)
+void	handler(int signal)
 {
-	int	i;
+	unsigned char	c_signal;
 
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	c_signal = 130;
+	if (signal == SIGINT)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 1);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		g_exit_status = g_exit_status & 0;
+		g_exit_status = g_exit_status | c_signal;
+	}
 }

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pavicent <pavicent@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 13:29:45 by pavicent          #+#    #+#             */
-/*   Updated: 2025/04/07 13:29:48 by pavicent         ###   ########.fr       */
+/*   Created: 2024/01/16 17:02:08 by pavicent          #+#    #+#             */
+/*   Updated: 2024/01/30 10:49:35 by pavicent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-char	**ft_init_env(char **str)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int		len;
-	int		i;
-	char	**env;
+	size_t	i;
 
 	i = 0;
-	len = ft_array_length(str);
-	env = ft_calloc(len + 1, sizeof(char *));
-	while (i < len)
+	if (n == 0)
+		return (0);
+	while (i < n && (s1[i] || s2[i]))
 	{
-		env[i] = ft_strdup(str[i]);
+		if (s1[i] != s2[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 		i++;
 	}
-	env[i] = NULL;
-	return (env);
+	return (0);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pavicent <pavicent@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2025/04/08 11:27:36 by pavicent          #+#    #+#             */
+/*   Updated: 2025/04/08 11:27:38 by pavicent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-void	take_pipes(t_pipes *data, char *line)
+void	ft_putendl_fd(char *s, int fd)
 {
 	int	i;
 
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
 }

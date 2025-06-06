@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2024/01/16 10:25:15 by dgargant          #+#    #+#             */
+/*   Updated: 2024/02/26 08:52:31 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-void	take_pipes(t_pipes *data, char *line)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int	i;
+	void	*ptr;
 
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	if (size != 0 && count > SIZE_MAX / size)
+		return (NULL);
+	ptr = malloc(count * size);
+	if (ptr != NULL)
+		ft_bzero(ptr, count * size);
+	return (ptr);
 }

@@ -1,26 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2024/09/06 09:33:14 by dgargant          #+#    #+#             */
+/*   Updated: 2024/09/26 14:41:12 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-void	take_pipes(t_pipes *data, char *line)
+void	ft_free_void_array(void **array)
 {
-	int	i;
+	size_t	i;
 
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	i = 0;
+	if (array)
+	{
+		while (array[i])
+		{
+			if (array[i])
+				free(array[i]);
+			array[i] = NULL;
+			i++;
+		}
+		free(array);
+		array = NULL;
+	}
+}
+
+void	*ft_free_array(char **array)
+{
+	size_t	i;
+
+	i = 0;
+	if (!array)
+		return (NULL);
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	return (NULL);
 }

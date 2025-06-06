@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2024/01/09 11:41:54 by dgargant          #+#    #+#             */
+/*   Updated: 2024/02/16 10:59:40 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-void	take_pipes(t_pipes *data, char *line)
+int	ft_isalnum(int c)
 {
-	int	i;
-
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	if ((ft_isalpha(c) || ft_isdigit(c)))
+		return (1);
+	return (0);
 }
+
+/*int main(void)
+{
+	char letter = '8';
+	char al = ft_isalnum(letter);
+	
+	if(al)
+		printf("\nel caracter es: %d\n", al);
+	else
+		printf("no es un caracter");
+}*/

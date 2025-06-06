@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2024/01/09 16:42:09 by dgargant          #+#    #+#             */
+/*   Updated: 2024/02/19 12:08:41 by dgargant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gertru.h"
+#include "libft.h"
 
-void	take_pipes(t_pipes *data, char *line)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
-
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	ft_memset(s, 0, n);
 }
+
+/*int main(void)
+{
+    char str[50] = "hola mundo, como estas";
+
+    printf("\nantes de bzero: %s\n", str);
+
+    //bzero(str + 3, 0 * sizeof(char));
+    ft_bzero(str + 3, 0);
+
+    printf("despues de bzero: %s\n", str);
+    
+    return (0);
+}*/

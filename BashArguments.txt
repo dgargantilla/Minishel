@@ -588,3 +588,77 @@ Linea final: ""|"" |""
 444
 >>>>>>linea moviendo comillas: | |
 zsh: segmentation fault (core dumped)  ./minishell
+
+
+
+--------------------------------------------------------------
+
+"ls cat"-e'$USER'patata'<<$USER'
+
+
+ ''' line[j]:'
+line[j]:p
+ ''' line[j]:'
+Comando doble puntero --> ls cat-e$USERpatata
+Numero de ficheros: 0
+minishell: command not found: ls cat-e$USERpatata
+
+
+
+Gertru$ ls -la -a
+total 120
+drwxr-xr-x 7 dgargant 2019    102 May 28 08:55 .
+drwxr-xr-x 7 dgargant 2019    114 May 28 08:54 ..
+drwxr-xr-x 8 dgargant 2019    163 May 28 08:54 .git
+drwxr-xr-x 2 dgargant 2019     22 May 28 08:54 inc
+drwxr-xr-x 5 dgargant 2019     72 May 28 08:55 libft
+-rw-r--r-- 1 dgargant 2019   2663 May 28 08:54 Makefile
+-rwxr-xr-x 1 dgargant 2019 118048 May 28 08:55 minishell
+drwxr-xr-x 6 dgargant 2019    113 May 28 08:55 objs
+drwxr-xr-x 6 dgargant 2019    113 May 28 08:54 sources
+Gertru$ cat -e
+alkfnnlfkna
+alkfnnlfkna$
+dlknadlkan
+dlknadlkan$
+^CGertru$ ls
+inc  libft  Makefile  minishell  objs  sources
+Gertru$ cat
+alfkalkfn
+alfkalkfn
+afllmafkna
+afllmafkna
+==947896== Warning: noted but unhandled ioctl 0x5412 with no size/direction hints.
+==947896==    This could cause spurious value errors to appear.
+==947896==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+
+
+
+Gertru$ echo "$patata"
+==949132== 
+==949132== HEAP SUMMARY:
+==949132==     in use at exit: 213,277 bytes in 300 blocks
+==949132==   total heap usage: 752 allocs, 452 frees, 242,432 bytes allocated
+==949132== 
+==949132== LEAK SUMMARY:
+==949132==    definitely lost: 0 bytes in 0 blocks
+==949132==    indirectly lost: 0 bytes in 0 blocks
+==949132==      possibly lost: 0 bytes in 0 blocks
+==949132==    still reachable: 213,277 bytes in 300 blocks
+==949132==         suppressed: 0 bytes in 0 blocks
+==949132== Rerun with --leak-check=full to see details of leaked memory
+==949132== 
+==949132== For lists of detected and suppressed errors, rerun with: -s
+==949132== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+
+--- no es un error pero XD ------
+
+Gertru$ cat -e
+fmnlaknflkanf
+fmnlaknflkanf$
+ñfkñnalkfna
+M-CM-1fkM-CM-1nalkfna$
+ñmnflkan`
+M-CM-1mnflkan`$
+^CGertru$ 

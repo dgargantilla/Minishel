@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_redirec.c                                :+:      :+:    :+:   */
+/*   expand_count.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pavicent <pavicent@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 10:43:27 by dgargant          #+#    #+#             */
-/*   Updated: 2025/05/06 11:11:25 by dgargant         ###   ########.fr       */
+/*   Created: 2025/05/29 09:33:09 by pavicent          #+#    #+#             */
+/*   Updated: 2025/05/29 09:33:46 by pavicent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gertru.h"
 
-void	take_pipes(t_pipes *data, char *line)
+int	iter_exp(char *line, int j)
 {
-	int	i;
-
-	i = data->pars->i + 1;
-	data->pars->count = i;
-	token_count_cmds(data, line);
-	take_token(data);
-	data->pars->np2 = 0;
-	data->pars->c_cmd++;
-	token_count_files(data, line);
+	while (line[j] && !ft_isspace(line[j]) && !ft_is_token(line, j)
+		&& line[j] != '|' && line[j] != '"' && line[j] != '\''
+		&& line[j] != '$')
+		j++;
+	return (j);
 }

@@ -3,58 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgargant <dgargant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pavicent <pavicent@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 13:47:10 by pavicent          #+#    #+#             */
-/*   Updated: 2025/04/11 10:26:42 by dgargant         ###   ########.fr       */
+/*   Created: 2025/05/08 13:22:25 by pavicent          #+#    #+#             */
+/*   Updated: 2025/05/08 13:22:27 by pavicent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gertru.h"
 
-void	ft_free_struct(t_pipes *data)
+void	ft_free_lst(t_pipes *data)
 {
-	int	i;
+	t_cmds	*next;
+	int		i;
 
-	i = 0;
-	if (data->fd)
+	while (data->cmds)
 	{
-		while (data->fd[i])
+		i = 0;
+		next = data->cmds->next;
+		ft_free_void_array((void **)data->cmds->cmds);
+		while (data->cmds->s_files && data->cmds->s_files->file[i])
 		{
-			free(data->fd[i]);
+			free(data->cmds->s_files->file[i]);
 			i++;
 		}
-		free(data->fd);
+		if (data->cmds->s_files->flagfd)
+		{
+			free(data->cmds->s_files->file);
+			free(data->cmds->s_files->fd);
+			free(data->cmds->s_files->flagfd);
+		}
+		free(data->cmds->s_files);
+		data->cmds->stop_exec = 0;
+		free(data->cmds);
+		data->cmds = NULL;
+		data->cmds = next;
 	}
-	/*if (data->mode == 3)
-	{
-		if (access(data->cmds->file, F_OK) == 0)
-			unlink(data->cmds->file);
-	}*/
-	if (data->pids)
-		free(data->pids);
-	free_fd(data);
-	if (data->cmds)
-		free_lists(data->cmds);
-	//if (data->limiters)
-	//	free(data->limiters);
-	free(data);
 }
 
-void	ft_free_tab(char **tab)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	free_lists(t_cmds *lst)
+void	free_cmdss(t_cmds *lst)
 {
 	t_cmds	*tmp;
 
@@ -64,23 +51,46 @@ void	free_lists(t_cmds *lst)
 		lst = lst->next;
 		if (tmp)
 		{
-			/*if (tmp->file)
-				free(tmp->file);*/
+			if (tmp->s_files)
+				ft_free_s_files(tmp->s_files);
+			if (tmp->cmds)
+				ft_free_void_array((void **)tmp->cmds);
 		}
 		free(tmp);
+		tmp = NULL;
 	}
 }
 
-/*void	close_files(t_cmds *list)
+void	ft_free_struct(t_pipes *data)
 {
-	t_cmds	*tmp;
+	ft_free_void_array((void **)data->env);
+	ft_free_lst(data);
+	if (data->pwd)
+		free(data->pwd);
+	if (data->oldpwd)
+		free(data->oldpwd);
+	rl_clear_history();
+	ft_free_pids(&data->pids);
+}
 
-	tmp = list;
-	while (list)
+void	ft_free_tab(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (list->fd > 0)
-			close(list->fd);
-		list = list->next;
+		free(str[i]);
+		i++;
 	}
-	list = tmp;
-}*/
+	free(str);
+}
+
+void	ft_free_pids(pid_t **pids)
+{
+	if (*pids)
+	{
+		free(*pids);
+		*pids = NULL;
+	}
+}
